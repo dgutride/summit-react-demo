@@ -55,15 +55,17 @@ module.exports = {
         test: /\.svg$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: {
               limit: 5000,
-              outputPath: 'svgs',
+              outputPath: 'images',
               name: '[name].[ext]',
             }
           }
         ],
-        include: input => input.indexOf('background-filter.svg') > 1
+        include: function(input) {
+          return input.indexOf('images') > -1;
+        }
       },
       {
         test: /\.svg$/,
@@ -89,7 +91,8 @@ module.exports = {
           return (input.indexOf('bgimages') === -1) &&
             (input.indexOf('fonts') === -1) &&
             (input.indexOf('background-filter') === -1) &&
-            (input.indexOf('pficon') === -1);
+            (input.indexOf('pficon') === -1) &&
+            (input.indexOf('images') === -1);
         }
       }
     ]

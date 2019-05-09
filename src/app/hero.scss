@@ -1,0 +1,27 @@
+@import '~@patternfly/patternfly/sass-utilities/_all';
+
+.summit-demo-hero {
+
+  background: url("../bgimages/fedora-background-left.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  h1.pf-c-title {
+    color: white;
+    text-align: center;
+    font-size: 44px;
+  }
+  h2 {
+    text-align: center;
+    font-size: 18px;
+    color: var(--pf-global--Color--200);
+  }
+
+  @media screen and (min-width: $pf-global--breakpoint--xs) {
+    min-height: 400px;
+  }
+
+  @media screen and (min-width: $pf-global--breakpoint--md) {
+    min-height: 550px;
+  }
+}

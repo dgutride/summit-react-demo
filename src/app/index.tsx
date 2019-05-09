@@ -1,48 +1,41 @@
 import React, { Component } from 'react';
-import { Alert, AlertActionCloseButton, BackgroundImage, BackgroundImageSrc } from '@patternfly/react-core';
+import {
+  Grid,
+  Brand,
+  Button,
+  Page,
+  PageHeader,
+  PageSection,
+  PageSectionVariants } from '@patternfly/react-core';
 import '@app/app.css';
-import xs from '@assets/images/pfbg_576.jpg';
-import xs2x from '@assets/images/pfbg_576@2x.jpg';
-import sm from '@assets/images/pfbg_768.jpg';
-import sm2x from '@assets/images/pfbg_768@2x.jpg';
-import lg from '@assets/images/pfbg_1200.jpg';
-import filter from '@assets/images/background-filter.svg';
+import './index.scss';
+import logo from '../images/redhat-logo.svg';
+import Hero from '@app/hero';
+import Products from '@app/products';
 
-const images = {
-  [BackgroundImageSrc.xs]: xs,
-  [BackgroundImageSrc.xs2x]: xs2x,
-  [BackgroundImageSrc.sm]: sm,
-  [BackgroundImageSrc.sm2x]: sm2x,
-  [BackgroundImageSrc.lg]: lg,
-  [BackgroundImageSrc.filter]: `${filter}#image_overlay`
+const logoProps = {
+  href: 'https://patternfly.org',
+  onClick: () => console.log('clicked logo'),
+  target: '_blank'
 };
 
+const Header = (
+  <PageHeader logo={<Brand src={logo} alt="Red Hat Logo" />} logoProps={logoProps} toolbar={<Button variant="secondary">Login</Button>} />
+);
+
 export default class App extends Component {
-  public state = {
-    isShowing: true
-  };
   public render() {
-    const { isShowing } = this.state;
     return (
       <React.Fragment>
-        <BackgroundImage src={images} />
-        <div className="app-container">
-          {isShowing && (
-            <div className="notification-container">
-              <Alert
-                variant="success"
-                title="Setup Complete"
-                action={<AlertActionCloseButton onClose={this.dismissNotification} />}
-              >
-                You have successfully launched your patternfly starter project.
-              </Alert>
-            </div>
-          )}
-        </div>
+        <Page header={Header}>
+          <Hero />
+          <PageSection className='summit-demo-marketing pf-m-no-fill'>
+            <Grid sm={ 12 } md={ 6 } lg={ 4 } gutter="md">
+              <Products />
+            </Grid>
+          </PageSection>
+        </Page>
       </React.Fragment>
     );
   }
-  private dismissNotification = () => {
-    this.setState({ isShowing: false });
-  };
 }
